@@ -1,0 +1,4 @@
+<Commands>
+	<Command name="ls" class="jshell.LsCommand"/>
+	<Command name="pw" class="jshell.LsCommand"/>
+</Commands>
