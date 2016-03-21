@@ -1,6 +1,6 @@
 package jshell;
 
-public interface LineProcessor<T> {
+public interface InputInterpreter<T> {
 	
 	Command process(T line);
 }

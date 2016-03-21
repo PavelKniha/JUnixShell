@@ -6,5 +6,5 @@ public interface Line{
 
 	String getRawContent();
 	
-	String[] getTokenedContent();
+	String getLineEnding();
 }

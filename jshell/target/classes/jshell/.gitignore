@@ -15,3 +15,9 @@
 /ValidationResult$Type.class
 /ValidationResult.class
 /XmlUtils.class
+/InputInterpreter.class
+/LineInputInterpreter.class
+/CommandDefinition.class
+/XmlCommandDefinition.class
+/XmlCommandDefinition$CommandAttribute.class
+/XmlCommandDefinition$XmlCommandAttribute.class

@@ -1,29 +1,32 @@
 package jshell;
 
+import java.io.File;
+
 public final class Shell {
 	
-	private static final LineInputParser INPUT_PARSER;
-	private static final LineProcessorImpl LINE_PROCESSOR;
+	private static final InputInterpreter<Line> INPUT_INTERPRETER;
+	private static final CommandDefinition COMMAND_DEFINITION;
+	
 
 	static {
-		INPUT_PARSER = LineInputParser.getInstance();
-		LINE_PROCESSOR = LineProcessorImpl.getInstance();
+		INPUT_INTERPRETER = LineInputInterpreter.getInstance();
+		COMMAND_DEFINITION = XmlCommandDefinition.getInstance(new File("commands.xml"));
 	}
 	
 	private Shell() {
 		throw new AssertionError();
 	}
 	
-	public static final Line parse(String input){ 
-		return INPUT_PARSER.parse(input);
-	}
-	
 	public static final Command process(Line line){
-		return LINE_PROCESSOR.process(line); 
+		return INPUT_INTERPRETER.process(line); 
 	}
 	
 	public static final void execute(Command command){
 		command.execute();
+	}
+	
+	public static final Class<Command> getCommandClass(String commandName){
+		return COMMAND_DEFINITION.getCommandClass(commandName);
 	}
 	
 	

@@ -7,16 +7,17 @@ public class SimpleLine implements Line {
 	private final String lineEnding;
 	private final String[] tokenedContent;
 
-	public SimpleLine(String content, String[] tokens) {
-		this(content, LINE_ENDING, tokens);
+	public SimpleLine(String content) {
+		this(content, LINE_ENDING);
 	}
 
-	public SimpleLine(String content, String lineEnding, String[] tokens) {
-		if (content == null || tokens == null || lineEnding == null) {
+	public SimpleLine(String content, String lineEnding) {
+		if (content == null || lineEnding == null) {
 			throw new NullPointerException(
-					"content, tokens, lineEnding must != null; content:tokens:lineEnding =  "
-							+ content + " : " + tokens + " : " + lineEnding);
+					"content, lineEnding must != null; content:lineEnding =  "
+							+ content + " : " + lineEnding);
 		}
+		String[] tokens = tokenize(content);
 		int tokensLength = tokens.length;
 		if (tokensLength <= 0) {
 			throw new IllegalArgumentException(
@@ -34,15 +35,23 @@ public class SimpleLine implements Line {
 	}
 
 	@Override
+	public String getLineEnding() {
+		return lineEnding;
+	}
+
 	public String[] getTokenedContent() {
 		int tokensLength = this.tokenedContent.length;
 		String[] copy = new String[tokensLength];
 		System.arraycopy(this.tokenedContent, 0, copy, 0, tokensLength);
 		return copy;
 	}
-
-	public String getLineEnding() {
-		return lineEnding;
+	
+	private String[] tokenize(final String input) {
+		String trimmed = input.trim();
+		String[] tokens = trimmed.split("\\s+");
+		return tokens;
 	}
+	
+	
 
 }

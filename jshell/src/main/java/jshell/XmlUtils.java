@@ -29,16 +29,15 @@ public final class XmlUtils {
 		}
 		return BUILDER;
 	}
-	
-	public static final Document parse(final File file){
+
+	public static final Document getDocument(File file) {
 		Document doc = null;
 		try {
-			doc = getBuilder().parse(file);
+			doc = BUILDER.parse(file);
 		} catch (SAXException | IOException e) {
 			throw new RuntimeException(e);
 		}
 		return doc;
-
 	}
 	
 	

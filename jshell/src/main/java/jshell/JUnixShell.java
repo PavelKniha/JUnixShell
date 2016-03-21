@@ -1,5 +1,6 @@
 package jshell;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public final class JUnixShell {
@@ -15,14 +16,18 @@ public final class JUnixShell {
 		if (input == null || input.isEmpty()) {
 			return;
 		}
-		Line line = Shell.parse(input);
-		Command command = Shell.process(line);
+		Command command = Shell.process(new SimpleLine(input));
 		Shell.execute(command);
 	}
 
 	private static String readCommandLine() {
 		Scanner sc = new Scanner(System.in);
-		String input = sc.nextLine();
+		String input = null;
+		try {
+			input = sc.nextLine();
+		} catch (NoSuchElementException | IllegalStateException e) {
+			throw new RuntimeException(e);
+		}
 		return input;
 	}
 
