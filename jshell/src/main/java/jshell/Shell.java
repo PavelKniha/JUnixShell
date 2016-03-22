@@ -2,18 +2,20 @@ package jshell;
 
 import java.io.File;
 
+import command.Command;
+
 public final class Shell {
 	
 	private static final InputInterpreter<Line> INPUT_INTERPRETER;
 	private static final CommandDefinition COMMAND_DEFINITION;
 	
-
 	static {
 		INPUT_INTERPRETER = LineInputInterpreter.getInstance();
 		COMMAND_DEFINITION = XmlCommandDefinition.getInstance(new File("commands.xml"));
 	}
 	
 	private Shell() {
+		
 		throw new AssertionError();
 	}
 	

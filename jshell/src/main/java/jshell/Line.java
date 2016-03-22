@@ -1,5 +1,7 @@
 package jshell;
 
+import java.util.List;
+
 public interface Line{
 
 	String LINE_ENDING = System.getProperty("line.separator");
@@ -7,4 +9,8 @@ public interface Line{
 	String getRawContent();
 	
 	String getLineEnding();
+
+	String getCommandName();
+	
+	List<String> getArguments();
 }

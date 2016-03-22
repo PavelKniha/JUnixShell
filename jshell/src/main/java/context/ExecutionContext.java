@@ -1,4 +1,4 @@
-package jshell;
+package context;
 
 public interface ExecutionContext {
 

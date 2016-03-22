@@ -7,6 +7,9 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import utils.XmlUtils;
+import command.Command;
+
 
 public final class XmlCommandDefinition implements CommandDefinition {
 
@@ -62,6 +65,9 @@ public final class XmlCommandDefinition implements CommandDefinition {
 		return clazz;
 	}
 	
+	public static final CommandDefinition getInstance(File file) {
+		return new XmlCommandDefinition(file);
+	}
 
 	private final String getAttributeValue(NamedNodeMap attributes, XmlCommandAttribute attribute){
 		Node nameNode = attributes.getNamedItem(attribute.toString().toLowerCase());
@@ -85,8 +91,5 @@ public final class XmlCommandDefinition implements CommandDefinition {
 		return attributes;
 	}
 
-	public static final CommandDefinition getInstance(File file) {
-		return new XmlCommandDefinition(file);
-	}
 
 }

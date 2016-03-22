@@ -3,6 +3,8 @@ package jshell;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import command.Command;
+
 public final class JUnixShell {
 
 	public static void main(String[] args) {

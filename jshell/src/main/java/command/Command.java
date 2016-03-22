@@ -1,4 +1,4 @@
-package jshell;
+package command;
 
 public interface Command {
 	

@@ -9,6 +9,10 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import command.Command;
+import command.ExitCommand;
+import command.InvalidCommand;
+
 public final class LineInputInterpreter implements InputInterpreter<Line> {
 
 	private static final LineInputInterpreter INSTANCE = new LineInputInterpreter();
@@ -20,11 +24,15 @@ public final class LineInputInterpreter implements InputInterpreter<Line> {
 		if (validateResult != null && !validateResult.passed()) {
 			return new InvalidCommand(validateResult.getInfo());
 		}
-		String commandName = getCommandName(line);
-
+		String commandName = line.getCommandName();
 		if (commandName.equals(ExitCommand.NAME)){
 			return new ExitCommand();
 		}
+// TODO: implement interfaces
+//		CommandFactory commandFactory = null;
+//		context = new ExecutionContext(new Arguments(line.getArguments()), new StandartOutput());
+//		command.execute(context)
+		
 		Command command = null;
 		try {
 			Class<Command> clazz = Shell.getCommandClass(commandName);
@@ -35,12 +43,8 @@ public final class LineInputInterpreter implements InputInterpreter<Line> {
 		return command;
 	}
 
-	private String getCommandName(final Line line) {
-		return "ls";
-	}
-
 	public ValidationResult validate(Line line) {
-		return new ValidationResult(Type.ERROR);
+		return new ValidationResult(Type.PASSED);
 	}
 
 	public static LineInputInterpreter getInstance() {
