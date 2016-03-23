@@ -1,5 +1,6 @@
 package command;
 
+import arguments.Arguments;
 import context.DefaultExecutionContext;
 import context.ExecutionContext;
 
@@ -20,7 +21,7 @@ public final class InvalidCommand implements Command{
 	}
 	
 	public void execute() {
-		System.out.println(errorInfo);
+		executionContext.getOutput().write(errorInfo);
 	}
 	
 	public String getName() {

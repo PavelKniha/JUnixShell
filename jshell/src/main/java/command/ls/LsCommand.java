@@ -1,5 +1,7 @@
-package command;
+package command.ls;
 
+import jshell.Output;
+import command.Command;
 import context.DefaultExecutionContext;
 import context.ExecutionContext;
 
@@ -7,23 +9,21 @@ public class LsCommand implements Command{
 	
 	private final ExecutionContext context;
 	
-	public LsCommand(){
-		this(new DefaultExecutionContext());
-	}
 	public LsCommand(ExecutionContext context) {
 		this.context = context;
+		// process arguments from context
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "ls";
 	}
 
 	@Override
 	public void execute() {
-		System.out.println("hello ls");
-		
+		Output out = context.getOutput();
+		out.write(getName());
+		out.write(context.getArguments().toString());		
 	}
 
 }

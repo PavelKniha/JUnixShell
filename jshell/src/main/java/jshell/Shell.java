@@ -3,6 +3,7 @@ package jshell;
 import java.io.File;
 
 import command.Command;
+import command.CommandFactory;
 
 public final class Shell {
 	
@@ -27,7 +28,7 @@ public final class Shell {
 		command.execute();
 	}
 	
-	public static final Class<Command> getCommandClass(String commandName){
+	public static final Class<CommandFactory> getCommandFactoryClass(String commandName){
 		return COMMAND_DEFINITION.getCommandClass(commandName);
 	}
 	

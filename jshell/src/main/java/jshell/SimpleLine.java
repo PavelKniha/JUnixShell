@@ -66,9 +66,10 @@ public class SimpleLine implements Line {
 	
 	@SuppressWarnings("unchecked")
 	private List<String> getArgumentsInternal(){
-		String[] args = null;
+		int newLength = this.tokenedContent.length - 1;
+		String[] args = new String[newLength];
 		if (this.tokenedContent.length > MIN_CONTENT_LENGTH) {
-			System.arraycopy(this.tokenedContent, 1, args, 0, this.tokenedContent.length - 1);
+			System.arraycopy(this.tokenedContent, 1, args, 0, newLength);
 		}
 		return args == null ? Collections.EMPTY_LIST : Collections.unmodifiableList(Arrays.asList(args));
 	}

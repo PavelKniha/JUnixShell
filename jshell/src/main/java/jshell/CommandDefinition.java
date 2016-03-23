@@ -1,9 +1,10 @@
 package jshell;
 
 import command.Command;
+import command.CommandFactory;
 
 public interface CommandDefinition {
 	
-	Class<Command> getCommandClass(String commandName);
+	Class<CommandFactory> getCommandClass(String commandName);
 	
 }

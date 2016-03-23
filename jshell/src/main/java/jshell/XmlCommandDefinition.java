@@ -9,6 +9,8 @@ import org.w3c.dom.NodeList;
 
 import utils.XmlUtils;
 import command.Command;
+import command.CommandFactory;
+
 
 
 public final class XmlCommandDefinition implements CommandDefinition {
@@ -36,15 +38,22 @@ public final class XmlCommandDefinition implements CommandDefinition {
 		this.docElements = node.getChildNodes();
 	}
 
+	
+	
+
+	/**
+	 * should not return null
+	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public Class<Command> getCommandClass(String commandName) {
+	public Class<CommandFactory> getCommandClass(String commandName) {
 		if (commandName == null || commandName.isEmpty()) {
 			throw new IllegalArgumentException(
 					"commandName must not be null or empty: commandName = "
 							+ commandName);
 		}
-		Class<Command> clazz = null;
+		Class<CommandFactory> clazz = null;
+		String className = null;
 		for (int i = 0; i < docElements.getLength(); i++) {
 			Node node = docElements.item(i);
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -52,15 +61,17 @@ public final class XmlCommandDefinition implements CommandDefinition {
 				
 				String name = getAttributeValue(attributes, XmlCommandAttribute.NAME);
 				if (commandName.equals(name)) {
-					String className = getAttributeValue(attributes, XmlCommandAttribute.CLASS);
-					
+					className = getAttributeValue(attributes, XmlCommandAttribute.CLASS);
 					try {
-						clazz = (Class<Command>) Class.forName(className);
-					} catch (ClassNotFoundException | ClassCastException e) {
-						throw new RuntimeException(e);
+						clazz = (Class<CommandFactory>) Class.forName(className);
+					} catch (ClassNotFoundException | ClassCastException  e) {
+						throw new RuntimeException("className = " + className + "; clazz = " + clazz, e);
 					}
 				}
 			}
+		}
+		if(clazz == null) {
+			throw new NullPointerException("className = " + className + "; clazz = " + clazz);
 		}
 		return clazz;
 	}

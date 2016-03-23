@@ -22,3 +22,6 @@
 /XmlCommandDefinition$CommandAttribute.class
 /XmlCommandDefinition$XmlCommandAttribute.class
 /CommandFactory.class
+/Output.class
+/ConsoleOutput.class
+/CommandsName.class
